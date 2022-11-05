@@ -1,4 +1,7 @@
 const divide_candy = (n) => {
+    if (n < 2 || n > Math.pow(10, 12)) {
+        return 'Error';
+    }
     let result = [0];
     for (let i = 1; i < n; i++) {
         if (n % (i + 1) === 0) {

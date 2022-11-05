@@ -11,11 +11,12 @@ Please take a look at this ReactJS code and correct the mistakes that you find. 
 import React, {useState} from 'react';
 
 function Counter(props) {
-  const [count] = useState(0);
+  const [count, setCount] = useState(0);
   
+  const incrementCount = () => setCount(count + 1);
   return (
     <p>Current count: {count}</p>
-    <button onClick={() => (count = count + 1)}>Increment count</button>
+    <button onClick={incrementCount}>Increment count</button>
   );
 }
 ```
@@ -53,6 +54,14 @@ class App extends React.Component {
 }
 ```
 
+click 1: Nothing will happen. handleClick1 will be executed on load because () is declared after this.handleClick1(). Since there is no corresponding function inside handleClick1, it won't execute any alert.
+
+click 2: this will raise an error since "this" is undefined. This is because "this" is not binded to the handleClick1.
+
+click 3: It will alert with message "MyComponent" since "this" is binded to handleClick2.
+
+click 4: It will alert with message "MyComponent" since handleClick3 is using an arrow function which doesn't require binding of "this".
+
 ### Q3. Memoization
 Memoized selectors are a common pattern in ReactJS applications to serve cached data derived from a global state. 
 
@@ -86,3 +95,13 @@ test('memoized selectors', () => {
   expect(fn2(stateB) !== fn2(stateC)).toBeTruthy();
 });
 ```
+
+I might be wrong but I understood memoized selector in this description as if the output of the input value is changed from the cached result, it will update the cache.
+1. pass
+2. fail - since stateA and stateC has different data for a.x, data will change on fn1(stateC) so they won't be equal.
+3. pass
+
+4. pass
+5. pass
+6. pass
+7. pass
